@@ -9,17 +9,17 @@
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.7/en/old-client.html
 #
-default: &default
-  adapter: mysql2
-  encoding: utf8
-  pool: 5
-  username: root
-  password:
-  host: localhost
+default: &default                      #設定を default という名前で共通化する
+  adapter: mysql2                      #mysql2 に接続することを明示
+  encoding: utf8                       #文字コードは utf8 で接続
+  pool: 5                              #ユーザー接続数の上限 (あまり気にしなくて良い)
+  username: root                       #MySQL 接続時のユーザ名
+  password:                            #MySQL 接続時のパスワード
+  host: localhost                      #MySQL のある場所 ( MySQL を起動するとここで MySQL が起動する)
 
-development:
-  <<: *default
-  database: message-board_development
+development:                           #開発環境上でのデータベース設定
+  <<: *default                         #共通化された default が読み込まれる
+  database: message-board_development  #データベース名を明示
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -47,8 +47,8 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: message-board_production
-  username: message-board
-  password: <%= ENV['MESSAGE-BOARD_DATABASE_PASSWORD'] %>
+production:                            #本番上でのデータベース設定
+  <<: *default                         #共通化された default が読み込まれる
+  database: message-board_production   #データベース名を明示
+  username: message-board              #MySQL 接続時のユーザ名
+  password: <%= ENV['MESSAGE-BOARD_DATABASE_PASSWORD'] %> #MySQL 接続時のパスワード
