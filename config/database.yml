@@ -48,7 +48,9 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:                            #本番上でのデータベース設定
-  <<: *default                         #共通化された default が読み込まれる
-  database: message-board_production   #データベース名を明示
-  username: message-board              #MySQL 接続時のユーザ名
-  password: <%= ENV['MESSAGE-BOARD_DATABASE_PASSWORD'] %> #MySQL 接続時のパスワード
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: message-board_production
+  username: message-board
+  password: <%= ENV['MESSAGE-BOARD_DATABASE_PASSWORD'] %>

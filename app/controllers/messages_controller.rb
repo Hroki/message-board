@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   def index
-    @messages = Message.all
+    @messages = Message.all.page(params[:page]).per(5)
   end 
   
   def show
